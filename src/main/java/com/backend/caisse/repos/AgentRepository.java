@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 public interface AgentRepository extends JpaRepository<Agent, Long> {
     @Transactional
     @Modifying
-    @Query("update Agent u set u.etat='activer' where u.matricule=?1")
+    @Query("update Agent u set u.etat='activé' where u.idU=?1")
     void updateEtatActiv(long id);
 
     @Transactional
     @Modifying
-    @Query("update Agent u set u.etat='desactiver' where u.matricule=?1")
+    @Query("update Agent u set u.etat='desactivé' where u.idU=?1")
     void updateEtatDesact(long id); 
 }

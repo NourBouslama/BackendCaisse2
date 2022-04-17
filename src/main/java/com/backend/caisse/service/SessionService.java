@@ -8,9 +8,11 @@ import com.backend.caisse.entities.SessionCaisse;
 
 public interface SessionService {
 
-    SessionCaisse CréerSessionCaisse(SessionCaisse p);
+    SessionCaisse CreerSessionCaisse(SessionCaisse p);
 
     void fermerSessionCaisseById(Long nums);
+
+   // void updateDateFermetureById(Long nums);
 
     void OuvrirSessionCaisseById(Long nums);
 
@@ -19,6 +21,8 @@ public interface SessionService {
     List<SessionCaisse> listerSessionCaisses();
     
     void fermerJournalCaisse(Long id);
+
+    List<SessionCaisse>listerEncaissementbyEtat(String etat);
     
 
     /******************************************/

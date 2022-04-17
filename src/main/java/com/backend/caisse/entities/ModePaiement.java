@@ -34,9 +34,7 @@ public class ModePaiement {
     private String libelle;
     private String etatM="activé";
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "modeP")
-    private List<AffectMode> affects;
+    
 
     
     @JsonIgnore

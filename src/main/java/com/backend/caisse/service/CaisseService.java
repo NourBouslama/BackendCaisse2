@@ -2,7 +2,6 @@ package com.backend.caisse.service;
 
 import java.util.List;
 
-import com.backend.caisse.entities.AffectMode;
 import com.backend.caisse.entities.Caisse;
 import com.backend.caisse.entities.ModePaiement;
 
@@ -20,7 +19,9 @@ public interface CaisseService {
 
     List<Caisse> listerCaisses();
 
-    void affecterMode(AffectMode a);
+
+
+    List<Caisse> listerCaissesByEtat(String etat);
 
     
 

@@ -17,5 +17,7 @@ public interface CaissierService {
     Caissier consulterCaissier(Long mat);
 
     List<Caissier> listerCaissiers();
+
+    List<Caissier> listerCaissiersByEtat(String etat);
     
 }

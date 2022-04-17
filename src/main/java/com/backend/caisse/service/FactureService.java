@@ -3,6 +3,7 @@ package com.backend.caisse.service;
 import java.util.List;
 
 import com.backend.caisse.entities.Facture;
+import com.backend.caisse.entities.Paiement;
 
 public interface FactureService {
     
@@ -19,4 +20,8 @@ public interface FactureService {
     void updateFacturePayer(long ref);
   
     Facture saveFacture(Facture facture);
+
+    void updateEtatPayer(Long referenceFact);
+
+    void updateFacture(Paiement paiement, Long referenceFact);
 }

@@ -22,7 +22,8 @@ import lombok.Setter;
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long matricule;
+    private Long idU;
+    private String matricule;
     private String nom;
     private String prenom;
     private String email;

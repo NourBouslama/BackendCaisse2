@@ -18,7 +18,7 @@ public class SessionServiceImpl implements SessionService {
     private SessionRepository SessionRepository;
 
     @Override
-    public SessionCaisse CréerSessionCaisse(SessionCaisse s) {
+    public SessionCaisse CreerSessionCaisse(SessionCaisse s) {
 
         return SessionRepository.save(s);
     }
@@ -70,6 +70,7 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public void OuvrirSessionCaisseById(Long nums) {
 
+        
         SessionRepository.updateEtatOuvrir(nums);
         
     }
@@ -80,5 +81,18 @@ public class SessionServiceImpl implements SessionService {
         SessionRepository.updateEtatJournal(numc);
         
     }
+
+    @Override
+    public List<SessionCaisse> listerEncaissementbyEtat(String etat) {
+        // TODO Auto-generated method stub
+        return SessionRepository.findByEncaissementsEtat(etat);
+    }
+
+    /*@Override
+    public void updateDateFermetureById(Long nums) {
+        
+        SessionRepository.updateDateFermeture(nums);
+        
+    }*/
 
 }

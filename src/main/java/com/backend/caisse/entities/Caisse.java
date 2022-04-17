@@ -27,16 +27,16 @@ import javax.persistence.JoinColumn;
 public class Caisse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idC;
     private Long numC;
     private String etat="activé";
+    private String intitule;
     
     
     @JsonIgnore
     @OneToMany(mappedBy = "caisse")
     private List<SessionCaisse> sessions;
-    @JsonIgnore
-    @OneToMany(mappedBy = "caisse")
-    private List<AffectMode> affects;
+  
     @ManyToMany
     @JoinTable(
         name="affecter_mode",

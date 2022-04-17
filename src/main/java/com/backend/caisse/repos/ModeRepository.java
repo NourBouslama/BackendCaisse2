@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ModeRepository extends JpaRepository <ModePaiement, Long> {
     @Transactional
 	@Modifying
-	@Query("update ModePaiement p set p.etatM = 'activer' where p.code = ?1")
+	@Query("update ModePaiement p set p.etatM = 'activé' where p.code = ?1")
 	void updateEtatAct(long code);
 
 	@Transactional
 	@Modifying
-	@Query("update ModePaiement p set p.etatM ='desactiver' where p.code = ?1")
+	@Query("update ModePaiement p set p.etatM ='desactivé' where p.code = ?1")
 	void updateEtatDesact(long code);
 
 

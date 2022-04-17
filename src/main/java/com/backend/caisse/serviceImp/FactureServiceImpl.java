@@ -5,6 +5,7 @@ import java.util.List;
 import com.backend.caisse.entities.Client;
 import com.backend.caisse.entities.Contrat;
 import com.backend.caisse.entities.Facture;
+import com.backend.caisse.entities.Paiement;
 import com.backend.caisse.repos.ClientRepository;
 import com.backend.caisse.repos.ContratRepository;
 import com.backend.caisse.repos.FactureRepository;
@@ -54,5 +55,17 @@ public class FactureServiceImpl implements FactureService {
     public Facture saveFacture(Facture facture) {
 
         return factureRepository.save(facture);
+    }
+
+    @Override
+    public void updateEtatPayer(Long referenceFact) {
+        factureRepository.updateEtatPayer(referenceFact);
+        
+    }
+
+    @Override
+    public void updateFacture(Paiement paiement, Long referenceFact) {
+        factureRepository.updateFacture(paiement, referenceFact);
+        
     }
 }

@@ -2,9 +2,8 @@ package com.backend.caisse.serviceImp;
 
 import java.util.List;
 
-import com.backend.caisse.entities.AffectMode;
+
 import com.backend.caisse.entities.Caisse;
-import com.backend.caisse.repos.AffectModeRepository;
 import com.backend.caisse.repos.CaisseRepository;
 import com.backend.caisse.service.CaisseService;
 
@@ -17,8 +16,7 @@ public class CaisseServiceImpl implements CaisseService {
 
     @Autowired
     private CaisseRepository caisseRepository;
-    @Autowired
-    private AffectModeRepository affectmodeRepository;
+
 
     @Override
     public Caisse ajouterCaisse(Caisse p) {
@@ -36,6 +34,7 @@ public class CaisseServiceImpl implements CaisseService {
     public void desactiverCaisseById(Long numc) {
 
         caisseRepository.updateEtatDesact(numc);
+     
 
     }
 
@@ -57,10 +56,12 @@ public class CaisseServiceImpl implements CaisseService {
         return caisseRepository.findAll();
     }
 
+ 
+
     @Override
-    public void affecterMode(AffectMode a) {
-        affectmodeRepository.save(a);
-        
+    public List<Caisse> listerCaissesByEtat(String etat) {
+
+        return caisseRepository.findByEtat(etat);
     }
 
     /*@Override

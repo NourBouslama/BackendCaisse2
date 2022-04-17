@@ -19,13 +19,13 @@ public interface CaisseRepository extends JpaRepository<Caisse, Long> {
 
 	@Transactional
 	@Modifying
-	@Query("update Caisse p set p.etat = 'activé' where p.numC = ?1")
-	void updateEtatAct(long numc);
+	@Query("update Caisse p set p.etat = 'activé' where p.idC = ?1")
+	void updateEtatAct(long idC);
 
 	@Transactional
 	@Modifying
-	@Query("update Caisse p set p.etat ='desactivé' where p.numC = ?1")
-	void updateEtatDesact(long numc);
+	@Query("update Caisse p set p.etat ='desactivé' where p.idC = ?1")
+	void updateEtatDesact(long idC);
 
-	
+	List<Caisse>findByEtat(String etat);
 }

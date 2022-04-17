@@ -33,6 +33,16 @@ public class CaissierRestController {
         }
     }
 
+    @RequestMapping(path = "/listerCaissierByEtat/{etat}",method = RequestMethod.GET)
+    public ResponseEntity<Object> listerCaissiersByEtat(@PathVariable("etat") String etat) {
+        try{
+            return new ResponseEntity<Object>(CaissierService.listerCaissiersByEtat(etat),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
     @RequestMapping(path = "/ajouterCaissier",method = RequestMethod.POST)
     public ResponseEntity<Object> ajouterCaissier(@RequestBody Caissier Caissier) {
         try{

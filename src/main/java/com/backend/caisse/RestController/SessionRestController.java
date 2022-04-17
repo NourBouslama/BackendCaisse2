@@ -31,11 +31,21 @@ public class SessionRestController {
         }
 
     }
-
-    @RequestMapping(value = "/consulterSessionCaisse/{numS}", method = RequestMethod.GET)
-    public  ResponseEntity<Object>  cosulterSessionCaisse(@PathVariable("numS") Long numS) {
+    
+    @RequestMapping(path = "/listerEncaissementbyEtat/{etat}", method = RequestMethod.GET)
+    public  ResponseEntity<Object>  listerEncaissementbyEtat(@PathVariable("etat") String etat) {
         try{
-            return new ResponseEntity<Object>(sessionService.consulterSessionCaisse(numS),HttpStatus.OK);
+            return new ResponseEntity<Object>(sessionService.listerEncaissementbyEtat(etat),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @RequestMapping(value = "/consulterSessionCaisse/{nums}", method = RequestMethod.GET)
+    public  ResponseEntity<Object>  cosulterSessionCaisse(@PathVariable("nums") Long nums) {
+        try{
+            return new ResponseEntity<Object>(sessionService.consulterSessionCaisse(nums),HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -45,24 +55,29 @@ public class SessionRestController {
     @RequestMapping(value = "/creerSessionCaisse",method = RequestMethod.POST)
     public  ResponseEntity<Object>  creerSessionCaisse(@RequestBody SessionCaisse SessionCaisse) {
         try{
-            return new ResponseEntity<Object>(sessionService.CréerSessionCaisse(SessionCaisse),HttpStatus.OK);
+            return new ResponseEntity<Object>(sessionService.CreerSessionCaisse(SessionCaisse),HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @RequestMapping(value = "/fermerSessionCaisse/{NumS}",method = RequestMethod.PUT)
-    public void fermerSessionCaisse(@PathVariable("NumS") Long nums) {
+    @RequestMapping(value = "/fermerSessionCaisse/{nums}",method = RequestMethod.PUT)
+    public void fermerSessionCaisse(@PathVariable("nums") Long nums) {
         sessionService.fermerSessionCaisseById(nums);
     }
 
-    @RequestMapping(value = "/ouvrirSessionCaisse/{NumS}",method = RequestMethod.PUT)
-    public void ouvrirSessionCaisse(@PathVariable("NumS") Long nums) {
+    /*@RequestMapping(value = "/updateDateFermetureById/{nums}",method = RequestMethod.PUT)
+    public void updateDateFermetureById(@PathVariable("nums") Long nums) {
+        sessionService.updateDateFermetureById(nums);
+    }*/
+
+    @RequestMapping(value = "/ouvrirSessionCaisse/{nums}",method = RequestMethod.PUT)
+    public void ouvrirSessionCaisse(@PathVariable("nums") Long nums) {
         sessionService.OuvrirSessionCaisseById(nums);
     }
 
-    @RequestMapping(value = "/fermerJournalCaisse/{NumS}",method = RequestMethod.PUT)
-    public void fermerJournalCaisse(@PathVariable("NumS") Long nums) {
+    @RequestMapping(value = "/fermerJournalCaisse/{nums}",method = RequestMethod.PUT)
+    public void fermerJournalCaisse(@PathVariable("nums") Long nums) {
         sessionService.fermerJournalCaisse(nums);
     }
 

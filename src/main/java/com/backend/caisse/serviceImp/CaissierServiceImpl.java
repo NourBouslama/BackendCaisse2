@@ -51,4 +51,10 @@ public class CaissierServiceImpl implements CaissierService {
         return caissierRepository.findAll();
     }
 
+    @Override
+    public List<Caissier> listerCaissiersByEtat(String etat) {
+    
+        return caissierRepository.findByEtat(etat);
+    }
+
 }

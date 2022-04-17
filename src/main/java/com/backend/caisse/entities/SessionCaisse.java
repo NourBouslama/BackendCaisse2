@@ -26,7 +26,7 @@ import lombok.Setter;
 public class SessionCaisse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long NumS;
+    private Long numS;
     private double montantInit;
     private double montantSession;
     private Date dateOuverture;

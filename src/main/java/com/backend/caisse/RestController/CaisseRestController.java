@@ -4,7 +4,7 @@ import com.backend.caisse.service.CaisseService;
 
 import java.util.List;
 
-import com.backend.caisse.entities.AffectMode;
+
 import com.backend.caisse.entities.Caisse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +32,16 @@ public class CaisseRestController {
             return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
         
+    }
+
+    @RequestMapping(path = "/listerCaisseByEtat/{etat}",method = RequestMethod.GET)
+    public ResponseEntity<Object> listerCaissesByEtat(@PathVariable("etat") String etat) {
+        try{
+            return new ResponseEntity<Object>(caisseService.listerCaissesByEtat(etat),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @RequestMapping(value = "/consulterCaisse/{numC}", method = RequestMethod.GET)
@@ -73,10 +83,7 @@ public class CaisseRestController {
          caisseService.activerCaisseById(numc);
     }
 
-    @RequestMapping(value = "/affecterMode",method = RequestMethod.POST)
-    public void affecterMode(@RequestBody AffectMode a) {
-         caisseService.affecterMode(a);
-    }
+
 
   /*  @RequestMapping(value = "/chercherCaissesParMode/{code}", method = RequestMethod.GET)
     public ResponseEntity<Object> chercherCaissesParModeCode(@PathVariable("code") Long code) {
