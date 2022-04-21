@@ -27,7 +27,7 @@ public class Encaissement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idE;
-    private Date dateE;
+    private Date dateE=new Date();
     private double montantE;
     private String etat = "payer";
     

@@ -14,31 +14,23 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface PaiementRepository extends JpaRepository<Paiement, Long> {
-
-    List<Paiement> findByDateP(LocalDate d);
-
-
-    @Transactional
-    @Modifying
-    @Query("select paiement.idP from  Facture f  where f.referenceFact=?1 ")
-    int selectIDPLong(long ff);
+    
+    Paiement findByIdP(Long idP);
+    
+    Paiement findByEncaissementIdE(Long ide);
 
     @Transactional
     @Modifying
     @Query("update Paiement p set p.etat='Annuler' where p.idP=?1")
-    void updateEtatAnnulerPaiement(long ff);
+    void annulerPaiement(long ff);
 
-    @Transactional
-    @Modifying
-    @Query("select encaissement.idE from  Paiement p  where p.idP=?1 ")
-    int selectIDELong(long idP);
 
     @Transactional
     @Modifying
     @Query("update Paiement p set p.encaissement=?1 where p.idP=?2")
     void updateEncaissementPaiement(Encaissement enc, long idp);
 
-    
+    // peut changer pr faire une modification pr encaissement tab
     @Transactional
     @Modifying
     @Query("update Paiement p set p.agent=?1 where p.idP=?2")

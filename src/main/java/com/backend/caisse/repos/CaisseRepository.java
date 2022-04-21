@@ -27,5 +27,7 @@ public interface CaisseRepository extends JpaRepository<Caisse, Long> {
 	@Query("update Caisse p set p.etat ='desactivé' where p.idC = ?1")
 	void updateEtatDesact(long idC);
 
+	Caisse findByIdC(Long id);
+
 	List<Caisse>findByEtat(String etat);
 }

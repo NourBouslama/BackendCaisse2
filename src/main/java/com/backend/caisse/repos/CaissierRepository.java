@@ -22,4 +22,6 @@ public interface CaissierRepository extends JpaRepository<Caissier, Long> {
 
 	List<Caissier>findByEtat(String etat);
 
+	Caissier findByIdU(Long id);
+
 }

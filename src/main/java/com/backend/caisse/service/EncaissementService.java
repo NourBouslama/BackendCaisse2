@@ -3,14 +3,20 @@ package com.backend.caisse.service;
 import java.util.List;
 
 import com.backend.caisse.entities.Encaissement;
-import com.backend.caisse.entities.SessionCaisse;
+
 
 public interface EncaissementService {
 
     List<Encaissement> listerEncaissements();
 
-  //  List<Encaissement> listerEncaissementsByEtat(Long nums);
+   List<Encaissement> listerEncaissementsParEtatETSession(String etat,Long nums);
 
-    List<Encaissement> listerEncaissementsBySession(Long nums);
+    List<Encaissement> listerEncaissementsParSession(Long nums);
+
+    List<Encaissement> listerEncaissementParEtatEtPaiementMode(String e,String m);
+
+    Encaissement ajouterEncaissement(Encaissement encaissement);
+
+    void annulerEncaissement(Long idE);
     
 }

@@ -70,14 +70,26 @@ public class CaissierRestController {
         }
     }
 
+ 
+
     @RequestMapping(value = "/desactiverCaissier/{matricule}", method = RequestMethod.PUT)
-    public void desactiverCaissier(@PathVariable("matricule") Long mat) {
-        CaissierService.desactiverCaissierByMat(mat);
+    public ResponseEntity<Object> desactiverCaissier(@PathVariable("matricule") Long mat) {
+        
+        try{
+            return new ResponseEntity<Object>(CaissierService.desactiverCaissierByMat(mat),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value = "/activerCaissier/{matricule}", method = RequestMethod.PUT)
-    public void activerCaissier(@PathVariable("matricule") Long mat) {
-        CaissierService.activerCaissierByMat(mat);
+    public ResponseEntity<Object> activerCaissier(@PathVariable("matricule") Long mat) {
+        
+        try{
+            return new ResponseEntity<Object>(CaissierService.activerCaissierByMat(mat),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

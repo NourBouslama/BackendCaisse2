@@ -59,23 +59,27 @@ public class AgentRestController {
         }
     }
 
+ 
+    
     @RequestMapping(value = "/desactiverAgent/{id}", method = RequestMethod.PUT)
-    public void desactiverAgent(@PathVariable("id") Long id) {
-        agentService.DesactiverAgent(id);
+    public ResponseEntity<Object> desactiverAgent(@PathVariable("id") Long id) {
+        try{
+            return new ResponseEntity<Object>(agentService.DesactiverAgent(id),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value = "/activerAgent/{id}", method = RequestMethod.PUT)
-    public void activerAgent(@PathVariable("id") Long id) {
-        agentService.ActiverAgent(id);
+    public ResponseEntity<Object> activerAgent(@PathVariable("id") Long id) {
+        
+        try{
+            return new ResponseEntity<Object>(agentService.ActiverAgent(id),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-   /* @RequestMapping(value = "/desactiverAgent/{id}",method = RequestMethod.PUT)
-    public ResponseEntity<Void> desactiverAgent(@PathVariable("id") Long id) {
-        try{
-            return new ResponseEntity<void>(agentService.DesactiverAgent(id),HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-        }*/
 
 
     

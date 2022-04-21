@@ -10,30 +10,27 @@ public interface SessionService {
 
     SessionCaisse CreerSessionCaisse(SessionCaisse p);
 
-    void fermerSessionCaisseById(Long nums);
+    SessionCaisse fermerSessionParNum(Long nums);
 
-   // void updateDateFermetureById(Long nums);
-
-    void OuvrirSessionCaisseById(Long nums);
+    SessionCaisse OuvrirSessionParNum(Long nums);
 
     SessionCaisse consulterSessionCaisse(Long id);
 
     List<SessionCaisse> listerSessionCaisses();
     
-    void fermerJournalCaisse(Long id);
+    SessionCaisse fermerJournalCaisse(Long id);
 
-    List<SessionCaisse>listerEncaissementbyEtat(String etat);
-    
+    List<SessionCaisse>listerSessionParEncaissementEtat(String etat);
 
-    /******************************************/
+    List<SessionCaisse> chercherParCaisseNumC(String etat,Long id);
 
-    List<SessionCaisse> chercherByCaisse(Caisse caisse);
+    List<SessionCaisse> chercherParCaissierId(Long id);
 
-    List<SessionCaisse> chercherByCaisseNumC(Long id);
+    SessionCaisse chercherParEtatETCaissier(String etat,Long id);
 
-    List<SessionCaisse> chercherByCaissier(Caissier caissier);
+    void modifierSessionParMontantEtNbFacture(double d, Long nbF, Long numc);
 
-    List<SessionCaisse> chercherByCaissierMatricule(Long id);
+    void annulerSession(double mt, Long numS);
 
     
 

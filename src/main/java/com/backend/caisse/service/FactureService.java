@@ -7,21 +7,13 @@ import com.backend.caisse.entities.Paiement;
 
 public interface FactureService {
     
-    List<Facture> ChercherRéférenceContrat(Long rfc);
+    List<Facture> ChercherFactureParReferenceContrat(Long rfc);
 
-    List<Facture> ChercherRéférenceClient(Long rf);
-  
-    Facture ChercherRéférenceFact(Long ff);
-  
-    // List<Facture> findByUtilisateurCIN(Long id);
-  
-    // Facture updateFacture(Long ff);
-  
-    void updateFacturePayer(long ref);
-  
-    Facture saveFacture(Facture facture);
+    List<Facture> ChercherFactureParReferenceClient(Long rf);
 
-    void updateEtatPayer(Long referenceFact);
+    List<Facture> ChercherFactureParReferenceFacture(Long ff);
 
-    void updateFacture(Paiement paiement, Long referenceFact);
+    void modifierFacture(Paiement paiement, Long ref);
+
+    void annulerPaiementFacture(Long referenceFact);
 }

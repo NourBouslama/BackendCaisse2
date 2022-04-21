@@ -33,10 +33,10 @@ public class ModeRestController {
 
     }
 
-    @RequestMapping(path = "/listerModeByEtat/{etat}",method = RequestMethod.GET)
-    public ResponseEntity<Object> listerModePaiementsByEtat(@PathVariable("etat") String etat) {
+    @RequestMapping(path = "/listerModePaiementParEtat/{etat}",method = RequestMethod.GET)
+    public ResponseEntity<Object> listerModePaiementParEtat(@PathVariable("etat") String etat) {
         try{
-            return new ResponseEntity<Object>(modeService.listerModePaiementsByEtat(etat),HttpStatus.OK);
+            return new ResponseEntity<Object>(modeService.listerModePaiementParEtat(etat),HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -72,12 +72,22 @@ public class ModeRestController {
     }
 
     @RequestMapping(value = "/desactiverMode/{code}", method = RequestMethod.PUT)
-    public void desactiverMode(@PathVariable("code") Long code) {
-        modeService.desactiverModePaiementById(code);
+    public ResponseEntity<Object> desactiverMode(@PathVariable("code") Long code) {
+        try{
+            return new ResponseEntity<Object>(modeService.desactiverModePaiementById(code),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        
     }
 
     @RequestMapping(value = "/activerMode/{code}", method = RequestMethod.PUT)
-    public void activerMode(@PathVariable("code") Long code) {
-        modeService.activerModePaiementById(code);
+    public ResponseEntity<Object> activerMode(@PathVariable("code") Long code) {
+        try{
+            return new ResponseEntity<Object>(modeService.activerModePaiementById(code),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+      
     }
 }

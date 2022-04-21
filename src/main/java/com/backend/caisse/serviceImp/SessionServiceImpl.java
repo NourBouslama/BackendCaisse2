@@ -24,9 +24,10 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public void fermerSessionCaisseById(Long nums) {
+    public SessionCaisse fermerSessionParNum(Long nums) {
 
         SessionRepository.updateEtatFermer(nums);
+        return SessionRepository.findByNumS(nums);
     }
 
     @Override
@@ -42,50 +43,59 @@ public class SessionServiceImpl implements SessionService {
     }
 
 
+    @Override
+    public List<SessionCaisse> chercherParCaisseNumC(String etat,Long numc) {
+
+        return SessionRepository.findByEtatAndCaisseNumC(etat,numc);
+    }
+
+  
 
     @Override
-    public List<SessionCaisse> chercherByCaisse(Caisse caisse) {
+    public SessionCaisse chercherParEtatETCaissier(String etat,Long mat) {
 
-        return SessionRepository.findByCaisse(caisse);
+        return SessionRepository.findByEtatAndCaissierIdU(etat,mat);
     }
 
     @Override
-    public List<SessionCaisse> chercherByCaisseNumC(Long numc) {
-
-        return SessionRepository.findByCaisseNumC(numc);
-    }
-
-    @Override
-    public List<SessionCaisse> chercherByCaissier(Caissier caissier) {
-
-        return SessionRepository.findByCaissier(caissier);
-    }
-
-    @Override
-    public List<SessionCaisse> chercherByCaissierMatricule(Long mat) {
-
-        return SessionRepository.findByCaissierMatricule(mat);
-    }
-
-    @Override
-    public void OuvrirSessionCaisseById(Long nums) {
+    public SessionCaisse OuvrirSessionParNum(Long nums) {
 
         
         SessionRepository.updateEtatOuvrir(nums);
+        return SessionRepository.findByNumS(nums);
         
     }
 
     @Override
-    public void fermerJournalCaisse(Long numc) {
+    public SessionCaisse fermerJournalCaisse(Long numc) {
      
         SessionRepository.updateEtatJournal(numc);
+        return SessionRepository.findByNumS(numc);
         
     }
 
     @Override
-    public List<SessionCaisse> listerEncaissementbyEtat(String etat) {
+    public List<SessionCaisse> listerSessionParEncaissementEtat(String etat) {
         // TODO Auto-generated method stub
         return SessionRepository.findByEncaissementsEtat(etat);
+    }
+
+    @Override
+    public List<SessionCaisse> chercherParCaissierId(Long id) {
+        // TODO Auto-generated method stub
+        return SessionRepository.findByCaissierIdU(id);
+    }
+
+    @Override
+    public void modifierSessionParMontantEtNbFacture(double d, Long nbF, Long numc) {
+        SessionRepository.updateSessionMontantAndNbFacture(d,nbF,numc); 
+        
+    }
+
+    @Override
+    public void annulerSession(double mt, Long numS) {
+        SessionRepository.AnnulerSessionMontantAndNbFacture(mt,  numS);
+        
     }
 
     /*@Override

@@ -13,35 +13,25 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface FactureRepository extends JpaRepository<Facture, Long> {
+    List<Facture> findByClientReferenceClient(Long refcli);
 
-    List<Facture> findByClient(Client client);
+    List<Facture> findByContratReferenceContrat(Long refCont);
 
-    List<Facture> findByContrat(Contrat contrat);
+    List<Facture> findByReferenceFact(Long ff);
+    
+   // List<Facture> findByPaiement(Paiement paiement);
 
-    Facture findByReferenceFact(Long ff);
-
-    Paiement findByPaiement(Long ff);
-
-    // List<Facture> findByUtilisateurCIN(Long id);
-
-    @Transactional
-    @Modifying
-    @Query("update Facture f set  f.paiement=?1  where f.referenceFact=?2")
-    void updateFacture(Paiement paie, long ff);
+    //Paiement findByPaiement(Long ff);
 
     @Transactional
     @Modifying
-    @Query("update Facture f set f.etat='Payer' where f.referenceFact=?1")
-    void updateEtatPayer(long ff);
+    @Query("update Facture f set f.etat='Payé' , f.paiement=?1 where f.referenceFact=?2")
+    void updateFacturePayer(Paiement paie, long ff);
 
     @Transactional
     @Modifying
-    @Query("update Facture f set f.etat='impayé' where f.referenceFact=?1")
-    void updateEtatAnnulerFacture(long ff);
-    @Transactional
-    @Modifying
-    @Query("update Facture f set f.paiement=null where f.referenceFact=?1")
-    void updateFacturePaiement(long ff);
+    @Query("update Facture f set f.etat='impayé', f.paiement=null where f.referenceFact=?1")
+    void updateFactureAnnuler(long ff);
 
     
 }

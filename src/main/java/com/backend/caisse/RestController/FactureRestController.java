@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/fact")
+@RequestMapping("/facture")
 @CrossOrigin
 public class FactureRestController {
     @Autowired
     FactureService factureService;
 
     @RequestMapping(value = "/refClient/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> chercherFactureRéférenceClient(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> chercherFactureParReferenceClient(@PathVariable("id") Long id) {
         try {
-            return new ResponseEntity<Object>(factureService.ChercherRéférenceClient(id), HttpStatus.OK);
+            return new ResponseEntity<Object>(factureService.ChercherFactureParReferenceContrat(id), HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -33,9 +33,9 @@ public class FactureRestController {
     }
 
     @RequestMapping(value = "/refContrat/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> chercherFactureRéférenceContrat(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> chercherFactureParReferenceContrat(@PathVariable("id") Long id) {
         try {
-            return new ResponseEntity<Object>(factureService.ChercherRéférenceContrat(id), HttpStatus.OK);
+            return new ResponseEntity<Object>(factureService.ChercherFactureParReferenceClient(id), HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -43,19 +43,9 @@ public class FactureRestController {
     }
 
     @RequestMapping(value = "/refFacture/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> chercherFactureRéférenceFacture(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> chercherFactureParReferenceFacture(@PathVariable("id") Long id) {
         try {
-            return new ResponseEntity<Object>(factureService.ChercherRéférenceFact(id), HttpStatus.OK);
-        } catch (Exception e) {
-
-            return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @RequestMapping(value = "/ajouterFacture", method = RequestMethod.POST)
-    public ResponseEntity<Object> ajouterFacture(@RequestBody Facture facture) {
-        try {
-            return new ResponseEntity<Object>(factureService.saveFacture(facture), HttpStatus.OK);
+            return new ResponseEntity<Object>(factureService.ChercherFactureParReferenceFacture(id), HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

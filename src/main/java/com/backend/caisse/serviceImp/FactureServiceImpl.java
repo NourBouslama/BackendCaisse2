@@ -2,15 +2,10 @@ package com.backend.caisse.serviceImp;
 
 import java.util.List;
 
-import com.backend.caisse.entities.Client;
-import com.backend.caisse.entities.Contrat;
 import com.backend.caisse.entities.Facture;
 import com.backend.caisse.entities.Paiement;
-import com.backend.caisse.repos.ClientRepository;
-import com.backend.caisse.repos.ContratRepository;
 import com.backend.caisse.repos.FactureRepository;
 import com.backend.caisse.service.FactureService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,52 +15,30 @@ public class FactureServiceImpl implements FactureService {
     @Autowired
     FactureRepository factureRepository;
 
-    @Autowired
-    ClientRepository clientRepository;
-
-    @Autowired
-    ContratRepository contratRepository;
-
     @Override
-    public List<Facture> ChercherRéférenceContrat(Long rfc) {
-        // return factureRepository.findByRéférenceContrat(rfc);
-        Contrat contrat = contratRepository.findByReferenceContrat(rfc);
-        return factureRepository.findByContrat(contrat);
+    public List<Facture> ChercherFactureParReferenceContrat(Long rfc) {
+        return factureRepository.findByContratReferenceContrat(rfc);
     }
 
     @Override
-    public List<Facture> ChercherRéférenceClient(Long rf) {
-        // return factureRepository.findByRéférenceClient(rf);
-        Client client = clientRepository.findByReferenceClient(rf);
-        return factureRepository.findByClient(client);
+    public List<Facture> ChercherFactureParReferenceClient(Long rf) {
+        return factureRepository.findByClientReferenceClient(rf);
     }
 
     @Override
-    public Facture ChercherRéférenceFact(Long ff) {
+    public List<Facture> ChercherFactureParReferenceFacture(Long ff) {
         return factureRepository.findByReferenceFact(ff);
     }
 
     @Override
-    public void updateFacturePayer(long ref) {
-        factureRepository.updateEtatPayer(ref);
+    public void modifierFacture(Paiement paiement, Long ref) {
+        factureRepository.updateFacturePayer(paiement,ref);
 
     }
 
     @Override
-    public Facture saveFacture(Facture facture) {
-
-        return factureRepository.save(facture);
-    }
-
-    @Override
-    public void updateEtatPayer(Long referenceFact) {
-        factureRepository.updateEtatPayer(referenceFact);
-        
-    }
-
-    @Override
-    public void updateFacture(Paiement paiement, Long referenceFact) {
-        factureRepository.updateFacture(paiement, referenceFact);
+    public void annulerPaiementFacture(Long referenceFact) {
+        factureRepository.updateFactureAnnuler(referenceFact);
         
     }
 }

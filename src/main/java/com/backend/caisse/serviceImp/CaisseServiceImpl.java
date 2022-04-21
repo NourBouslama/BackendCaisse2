@@ -31,17 +31,19 @@ public class CaisseServiceImpl implements CaisseService {
     }
 
     @Override
-    public void desactiverCaisseById(Long numc) {
+    public Caisse desactiverCaisseById(Long numc) {
 
         caisseRepository.updateEtatDesact(numc);
+        return caisseRepository.findByIdC(numc);
      
 
     }
 
     @Override
-    public void activerCaisseById(Long numc) {
+    public Caisse activerCaisseById(Long numc) {
 
         caisseRepository.updateEtatAct(numc);
+        return caisseRepository.findByIdC(numc);
     }
 
     @Override
@@ -59,23 +61,12 @@ public class CaisseServiceImpl implements CaisseService {
  
 
     @Override
-    public List<Caisse> listerCaissesByEtat(String etat) {
+    public List<Caisse> listerCaissesParEtat(String etat) {
 
         return caisseRepository.findByEtat(etat);
     }
 
-    /*@Override
-    public List<Caisse> ChercherCaissesByMode(ModePaiement mode) {
-
-        return caisseRepository.findByModes(mode);
-    }
-
-    @Override
-    public List<Caisse> chercherCaissesbyModeCode(Long code) {
-
-        return caisseRepository.findByModesCode(code);
-    }
-*/
+ 
   
 
 }

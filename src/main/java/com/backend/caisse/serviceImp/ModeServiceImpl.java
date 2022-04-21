@@ -27,16 +27,18 @@ public class ModeServiceImpl implements ModeService {
     }
 
     @Override
-    public void desactiverModePaiementById(Long code) {
+    public ModePaiement desactiverModePaiementById(Long code) {
     
         modeRepository.updateEtatDesact(code);
+        return modeRepository.findByCode(code);
         
     }
 
     @Override
-    public void activerModePaiementById(Long code) {
+    public ModePaiement activerModePaiementById(Long code) {
     
         modeRepository.updateEtatAct(code);
+        return modeRepository.findByCode(code);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class ModeServiceImpl implements ModeService {
     }
 
     @Override
-    public List<ModePaiement> listerModePaiementsByEtat(String etat) {
+    public List<ModePaiement> listerModePaiementParEtat(String etat) {
 
         return modeRepository.findByEtatM(etat);
     }

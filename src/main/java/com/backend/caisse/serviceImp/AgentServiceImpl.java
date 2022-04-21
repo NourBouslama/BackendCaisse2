@@ -25,13 +25,18 @@ public class AgentServiceImpl implements AgentService{
     }
 
     @Override
-    public void ActiverAgent(long matricule) {
+    public Agent ActiverAgent(long matricule) {
+
         agentRepository.updateEtatActiv(matricule);
+        return  agentRepository.findByIdU(matricule);
+        
     }
 
     @Override
-    public void DesactiverAgent(long matricule) {
+    public Agent DesactiverAgent(long matricule) {
+
         agentRepository.updateEtatDesact(matricule);
+        return  agentRepository.findByIdU(matricule);
     }
 
     @Override

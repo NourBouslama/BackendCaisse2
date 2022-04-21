@@ -10,15 +10,15 @@ public interface ModeService {
 
     ModePaiement modifierModePaiement(ModePaiement p);
 
-    void desactiverModePaiementById(Long code);
+    ModePaiement desactiverModePaiementById(Long code);
 
-    void activerModePaiementById(Long code);
+    ModePaiement activerModePaiementById(Long code);
 
     List<ModePaiement> listerModePaiements();
 
-    List<ModePaiement> listerModePaiementsByEtat(String etat);
+    List<ModePaiement> listerModePaiementParEtat(String etat);
 
     ModePaiement consulterModePaiement(Long id);
 
-    // void desactiverModePaiement(ModePaiement p);
+  
 }

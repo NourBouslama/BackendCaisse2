@@ -28,15 +28,17 @@ public class CaissierServiceImpl implements CaissierService {
     }
 
     @Override
-    public void desactiverCaissierByMat(Long mat) {
+    public Caissier desactiverCaissierByMat(Long id) {
 
-        caissierRepository.updateEtatDesact(mat);
+        caissierRepository.updateEtatDesact(id);
+        return caissierRepository.findByIdU(id);
     }
 
     @Override
-    public void activerCaissierByMat(Long mat) {
+    public Caissier activerCaissierByMat(Long id) {
 
-        caissierRepository.updateEtatAct(mat);
+        caissierRepository.updateEtatAct(id);
+        return caissierRepository.findByIdU(id);
     }
 
     @Override

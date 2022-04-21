@@ -11,25 +11,15 @@ public interface CaisseService {
 
     Caisse modifierCaisse(Caisse p);
 
-    void desactiverCaisseById(Long id);
+    Caisse desactiverCaisseById(Long id);
 
-    void activerCaisseById(Long id);
+    Caisse activerCaisseById(Long id);
 
     Caisse consulterCaisse(Long id);
 
     List<Caisse> listerCaisses();
 
-
-
-    List<Caisse> listerCaissesByEtat(String etat);
+    List<Caisse> listerCaissesParEtat(String etat);
 
     
-
-    /********************************/
-
-    /*List<Caisse> ChercherCaissesByMode(ModePaiement mode);
-
-    List<Caisse> chercherCaissesbyModeCode(Long code);*/
-
-    // void deleteCaisse(Caisse p);
 }

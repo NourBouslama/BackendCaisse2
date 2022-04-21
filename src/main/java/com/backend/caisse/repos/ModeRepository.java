@@ -20,6 +20,7 @@ public interface ModeRepository extends JpaRepository <ModePaiement, Long> {
 	@Query("update ModePaiement p set p.etatM ='desactivé' where p.code = ?1")
 	void updateEtatDesact(long code);
 
+    ModePaiement findByCode(Long code);
 
 	List<ModePaiement>findByEtatM(String etat);
 }

@@ -17,4 +17,6 @@ public interface AgentRepository extends JpaRepository<Agent, Long> {
     @Modifying
     @Query("update Agent u set u.etat='desactivé' where u.idU=?1")
     void updateEtatDesact(long id); 
+
+    Agent findByIdU(Long id);
 }

@@ -10,11 +10,11 @@ public interface CaissierService {
 
     Caissier modifierCaissier(Caissier p);
 
-    void desactiverCaissierByMat(Long mat);
+    Caissier desactiverCaissierByMat(Long id);
 
-    void activerCaissierByMat(Long mat);
+    Caissier activerCaissierByMat(Long id);
 
-    Caissier consulterCaissier(Long mat);
+    Caissier consulterCaissier(Long id);
 
     List<Caissier> listerCaissiers();
 

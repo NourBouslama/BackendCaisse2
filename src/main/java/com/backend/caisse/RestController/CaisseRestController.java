@@ -34,10 +34,10 @@ public class CaisseRestController {
         
     }
 
-    @RequestMapping(path = "/listerCaisseByEtat/{etat}",method = RequestMethod.GET)
-    public ResponseEntity<Object> listerCaissesByEtat(@PathVariable("etat") String etat) {
+    @RequestMapping(path = "/listerCaisseParEtat/{etat}",method = RequestMethod.GET)
+    public ResponseEntity<Object> listerCaissesParEtat(@PathVariable("etat") String etat) {
         try{
-            return new ResponseEntity<Object>(caisseService.listerCaissesByEtat(etat),HttpStatus.OK);
+            return new ResponseEntity<Object>(caisseService.listerCaissesParEtat(etat),HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -74,26 +74,27 @@ public class CaisseRestController {
     }
 
     @RequestMapping(value = "/desactiverCaisse/{numC}",method = RequestMethod.PUT)
-    public void desactiverCaisse(@PathVariable("numC") Long numc) {
-         caisseService.desactiverCaisseById(numc);
-    }
-
-    @RequestMapping(value = "/activerCaisse/{numC}",method = RequestMethod.PUT)
-    public void activerCaisse(@PathVariable("numC") Long numc) {
-         caisseService.activerCaisseById(numc);
-    }
-
-
-
-  /*  @RequestMapping(value = "/chercherCaissesParMode/{code}", method = RequestMethod.GET)
-    public ResponseEntity<Object> chercherCaissesParModeCode(@PathVariable("code") Long code) {
+    public ResponseEntity<Object>  desactiverCaisse(@PathVariable("numC") Long numc) {
         try{
-            return new ResponseEntity<Object>(caisseService.chercherCaissesbyModeCode(code),HttpStatus.OK);
+            return new ResponseEntity<Object>(caisseService.desactiverCaisseById(numc),HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
+     
     }
-*/
+
+    @RequestMapping(value = "/activerCaisse/{numC}",method = RequestMethod.PUT)
+    public ResponseEntity<Object>  activerCaisse(@PathVariable("numC") Long numc) {
+        try{
+            return new ResponseEntity<Object>(caisseService.activerCaisseById(numc),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+       
+    }
+
+
+
     
     
 }

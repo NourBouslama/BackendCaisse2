@@ -1,6 +1,7 @@
 package com.backend.caisse.serviceImp;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,10 @@ import com.backend.caisse.repos.ContratRepository;
 import com.backend.caisse.repos.EncaissementRepository;
 import com.backend.caisse.repos.FactureRepository;
 import com.backend.caisse.repos.PaiementRepository;
+import com.backend.caisse.service.EncaissementService;
+import com.backend.caisse.service.FactureService;
 import com.backend.caisse.service.PaiementService;
+import com.backend.caisse.service.SessionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,145 +28,83 @@ import org.springframework.stereotype.Service;
 public class PaiementServiceImpl implements PaiementService {
 
     @Autowired
-    FactureRepository factureRepository;
-
-    @Autowired
     PaiementRepository paiementRepository;
 
     @Autowired
-    EncaissementRepository encaissementRepository;
+    FactureService factureService;
 
     @Autowired
-    ContratRepository contratRepository;
+    EncaissementService encaissementService;
 
     @Autowired
-    ClientRepository clientRepository;
-
-  
+    SessionService sessionService;
 
     @Override
-    public void AjouterPaiementFactureAgent(List<Facture> factures) {
+    public Paiement PaiementFactureAgent(List<Facture> factures, Long p) {
 
-        double mt = 0;
+Paiement paiement = paiementRepository.findByIdP(p);
         for (Facture f : factures) {
 
-            // FactureServiceImpl.updateFacturePayer(f.getRéférenceFact());
-            factureRepository.updateEtatPayer(f.getReferenceFact());
-            factureRepository.updateFacture(f.getPaiement(), f.getReferenceFact());
-            paiementRepository.updatePaiement(f.getPaiement().getAgent(), f.getPaiement().getIdP());
-            mt = mt + f.getMontant();
+            factureService.modifierFacture(paiement, f.getReferenceFact());
+            paiementRepository.updatePaiement(paiement.getAgent(), paiement.getIdP());
 
         }
+        return paiement;
     }
 
+
     @Override
-    public Paiement saveSaisieAvance(Facture facture) {
-
-        facture.setEtat("prépayer");
-        // facture.setDatePaiement(new Date());
-        factureRepository.save(facture);
-
-        // enregistrer le paiement
-        Paiement paie = new Paiement();
-        return paiementRepository.save(paie);
-
-    }
-
-    // annulation d'une liste des factures
-    @Override
-    public void AnnulerPaiementListeFacture(List<Facture> fact) {
+    public Paiement AnnulerPaiementFacture(List<Facture> fact) {
         Paiement p = new Paiement();
+      
         for (Facture f : fact) {
-            factureRepository.updateEtatAnnulerFacture(f.getReferenceFact());
+            factureService.annulerPaiementFacture(f.getReferenceFact());
             p = f.getPaiement();
-            factureRepository.updateFacturePaiement(f.getReferenceFact());
+           
+            sessionService.annulerSession(f.getMontant(),p.getEncaissement().getSession().getNumS());
         }
-        paiementRepository.updateEtatAnnulerPaiement(p.getIdP());
-        encaissementRepository.updateEtatAnnulerEncaissement(p.getEncaissement().getIdE());
-
+       
+        paiementRepository.annulerPaiement(p.getIdP());
+        encaissementService.annulerEncaissement(p.getEncaissement().getIdE());
+    
+return p;
     }
 
-    // annulation d'une liste des factures selon réf contrat
 
     @Override
-    public void AnnulerPaiementRefContrat(Long refContrat) {
+    public List<Paiement> ListerPaiements(Long numS) {
 
-        Contrat contrat = contratRepository.findByReferenceContrat(refContrat);
-
-        List<Facture> factures = factureRepository.findByContrat(contrat);
-
-        Paiement p = new Paiement();
-        for (Facture f : factures) {
-            factureRepository.updateEtatAnnulerFacture(f.getReferenceFact());
-            p = f.getPaiement();
-            factureRepository.updateFacturePaiement(f.getReferenceFact());
+        List<Paiement> paiements= new ArrayList<>();
+        List<Encaissement> lEncaissements=encaissementService.listerEncaissementsParSession(numS);
+        for(Encaissement e: lEncaissements)
+        {
+            paiements.add(paiementRepository.findByEncaissementIdE(e.getIdE()));
+            
         }
-        paiementRepository.updateEtatAnnulerPaiement(p.getIdP());
-        encaissementRepository.updateEtatAnnulerEncaissement(p.getEncaissement().getIdE());
-
-    }
-
-    // annulation d'une liste des factures selon réf client
-
-    @Override
-    public void AnnulerPaiementRefClient(Long refClient) {
-
-        Client client = clientRepository.findByReferenceClient(refClient);
-        List<Facture> factures = factureRepository.findByClient(client);
-        Paiement p = new Paiement();
-        for (Facture f : factures) {
-            factureRepository.updateEtatAnnulerFacture(f.getReferenceFact());
-            p = f.getPaiement();
-            factureRepository.updateFacturePaiement(f.getReferenceFact());
-        }
-        paiementRepository.updateEtatAnnulerPaiement(p.getIdP());
-        encaissementRepository.updateEtatAnnulerEncaissement(p.getEncaissement().getIdE());
-
-    }
-
-    // annulation d'une facture selon la réf facture
-    @Override
-    public void AnnulerPaiementRefFacture(Long refFacture) {
-
-        Facture facture = factureRepository.findByReferenceFact(refFacture);
-        factureRepository.updateEtatAnnulerFacture(facture.getReferenceFact());
-        paiementRepository.updateEtatAnnulerPaiement(facture.getPaiement().getIdP());
-        encaissementRepository.updateEtatAnnulerEncaissement(facture.getPaiement().getEncaissement().getIdE());
-        factureRepository.updateFacturePaiement(facture.getReferenceFact());
-
-    }
-
-    @Override
-    public List<Paiement> ListerPaiements() {
-
-        return paiementRepository.findByDateP(LocalDate.now());
+        return paiements;
     }
 
     @Override
     public Paiement ajouterPaiement(Paiement p) {
-
-        return paiementRepository.save(p);
+        Paiement paie= paiementRepository.save(p);
+        paiementRepository.updateEncaissementPaiement(p.getEncaissement(), paie.getIdP());
+return paie;
     }
 
     @Override
-    public List<Facture> AjouterPaiementFacture(List<Facture> factures) {
+    public Paiement paiementFactureCaissier(List<Facture> factures, Long p) {
 
-        double mt = 0;
-        Paiement paiement = new Paiement();
+        Paiement paiement = paiementRepository.findByIdP(p);
+
         for (Facture f : factures) {
 
-            factureRepository.updateEtatPayer(f.getReferenceFact());
-            factureRepository.updateFacture(f.getPaiement(), f.getReferenceFact());
-            mt = mt + f.getMontant();
-            paiement = f.getPaiement();
+            factureService.modifierFacture(paiement, f.getReferenceFact());
 
         }
-        Encaissement enc = new Encaissement(new Date(), mt);
-        encaissementRepository.save(enc);
-        // update le paiement
-        paiementRepository.updateEncaissementPaiement(enc, paiement.getIdP());
 
-        return factures;
+return paiement;
     }
-    
+
+  
+ 
 }

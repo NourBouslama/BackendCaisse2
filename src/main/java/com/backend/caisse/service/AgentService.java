@@ -10,9 +10,9 @@ public interface AgentService {
 
     Agent ModifierAgent(Agent agt);
 
-    void ActiverAgent(long matricule);
+    Agent ActiverAgent(long matricule);
 
-    void DesactiverAgent(long matricule);
+    Agent DesactiverAgent(long matricule);
 
     Agent ConsulterAgent(long matricule);
 

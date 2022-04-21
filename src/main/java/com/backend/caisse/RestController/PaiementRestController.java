@@ -23,45 +23,54 @@ public class PaiementRestController {
     @Autowired
     PaiementService paiementService;
 
-    @RequestMapping(value = "/annuler/{id}", method = RequestMethod.PUT)
-    public void annulerPaiement(@PathVariable("id") Long id) {
-        paiementService.AnnulerPaiementRefFacture(id);
-    }
-
     @RequestMapping(path = "/annuler", method = RequestMethod.PUT)
-    public void annulerPaiement3(@RequestBody List<Facture> factures) {
-        paiementService.AnnulerPaiementListeFacture(factures);
-    }
+    public ResponseEntity<Object> annulerPaiementListFactures(@RequestBody List<Facture> factures) {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Object> listerPaiements() {
         try {
-            return new ResponseEntity<Object>(paiementService.ListerPaiements(), HttpStatus.OK);
+            return new ResponseEntity<Object>(paiementService.AnnulerPaiementFacture(factures), HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @RequestMapping(path = "/payer", method = RequestMethod.PUT)
-    public ResponseEntity<Object> ajouterPaiementFacture(@RequestBody List<Facture> factures) {
+    @RequestMapping(value = "/listerPaiement/{numS}", method = RequestMethod.GET)
+    public ResponseEntity<Object> listerPaiements(@PathVariable("numS") Long numS) {
         try {
-            return new ResponseEntity<Object>(paiementService.AjouterPaiementFacture(factures), HttpStatus.OK);
+            return new ResponseEntity<Object>(paiementService.ListerPaiements(numS), HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @RequestMapping(path = "/payeragent", method = RequestMethod.PUT)
-    public void ajouterPaiementFactureAgent(@RequestBody List<Facture> factures) {
-        paiementService.AjouterPaiementFactureAgent(factures);
+    @RequestMapping(path = "/payer/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Object> PaiementFactures(@RequestBody List<Facture> factures, @PathVariable("id") Long idP) {
+
+        try {
+            return new ResponseEntity<Object>(paiementService.paiementFactureCaissier(factures, idP), HttpStatus.OK);
+        } catch (Exception e) {
+
+            return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
-    @RequestMapping(path = "/avance", method = RequestMethod.POST)
-    public ResponseEntity<Object> saisieAvanceFacture(@RequestBody Facture facture) {
+    @RequestMapping(path = "/ajouterPaiement", method = RequestMethod.POST)
+    public ResponseEntity<Object> ajouterPaiement(@RequestBody Paiement paiement) {
         try {
-            return new ResponseEntity<Object>(paiementService.saveSaisieAvance(facture), HttpStatus.OK);
+            return new ResponseEntity<Object>(paiementService.ajouterPaiement(paiement), HttpStatus.OK);
+        } catch (Exception e) {
+
+            return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(path = "/payeragent/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Object> PaiementFactureAgent(@RequestBody List<Facture> factures,
+            @PathVariable("id") Long idP) {
+        try {
+            return new ResponseEntity<Object>(paiementService.PaiementFactureAgent(factures, idP), HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
