@@ -66,6 +66,12 @@ public class CaisseServiceImpl implements CaisseService {
         return caisseRepository.findByEtat(etat);
     }
 
+    @Override
+    public List<Caisse> listerCaissesParSessionsEtat(String etat) {
+        // TODO Auto-generated method stub
+        return caisseRepository.findBySessionsEtat(etat);
+    }
+
  
   
 

@@ -21,5 +21,7 @@ public interface CaisseService {
 
     List<Caisse> listerCaissesParEtat(String etat);
 
+    List<Caisse> listerCaissesParSessionsEtat(String etat);
+
     
 }

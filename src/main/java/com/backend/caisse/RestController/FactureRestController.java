@@ -25,7 +25,7 @@ public class FactureRestController {
     @RequestMapping(value = "/refClient/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> chercherFactureParReferenceClient(@PathVariable("id") Long id) {
         try {
-            return new ResponseEntity<Object>(factureService.ChercherFactureParReferenceContrat(id), HttpStatus.OK);
+            return new ResponseEntity<Object>(factureService.ChercherFactureParReferenceClient(id), HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -35,7 +35,7 @@ public class FactureRestController {
     @RequestMapping(value = "/refContrat/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> chercherFactureParReferenceContrat(@PathVariable("id") Long id) {
         try {
-            return new ResponseEntity<Object>(factureService.ChercherFactureParReferenceClient(id), HttpStatus.OK);
+            return new ResponseEntity<Object>(factureService.ChercherFactureParReferenceContrat(id), HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

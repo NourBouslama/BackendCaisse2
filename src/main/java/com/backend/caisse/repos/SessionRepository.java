@@ -20,7 +20,9 @@ public interface SessionRepository extends JpaRepository<SessionCaisse, Long> {
 
 	List<SessionCaisse> findByCaissierIdU(Long id);
 
-	SessionCaisse findByEtatAndCaissierIdU(String etat,Long id);
+	List<SessionCaisse> findByEtatAndCaissierIdU(String etat,Long id);
+
+	SessionCaisse findByCaissierIdUAndEtat(Long id,String etat);
 
 	@Transactional
 	@Modifying

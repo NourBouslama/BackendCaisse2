@@ -44,6 +44,16 @@ public class CaisseRestController {
 
     }
 
+    @RequestMapping(path = "/listerCaissesParSessionsEtat/{etat}",method = RequestMethod.GET)
+    public ResponseEntity<Object> listerCaissesParSessionsEtat(@PathVariable("etat") String etat) {
+        try{
+            return new ResponseEntity<Object>(caisseService.listerCaissesParSessionsEtat(etat),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
     @RequestMapping(value = "/consulterCaisse/{numC}", method = RequestMethod.GET)
     public ResponseEntity<Object> consulterCaisse(@PathVariable("numC") Long numC) {
         try{

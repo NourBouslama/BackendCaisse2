@@ -13,15 +13,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface FactureRepository extends JpaRepository<Facture, Long> {
+
     List<Facture> findByClientReferenceClient(Long refcli);
 
     List<Facture> findByContratReferenceContrat(Long refCont);
 
     List<Facture> findByReferenceFact(Long ff);
-    
-   // List<Facture> findByPaiement(Paiement paiement);
-
-    //Paiement findByPaiement(Long ff);
 
     @Transactional
     @Modifying

@@ -64,6 +64,16 @@ public class SessionRestController {
 
     }
 
+    @RequestMapping(path = "/chercherParCaissierEtEtat/{id}/{etat}", method = RequestMethod.GET)
+    public  ResponseEntity<Object>  chercherParCaissierETEtat(@PathVariable("id") Long id,@PathVariable("etat") String etat) {
+        try{
+            return new ResponseEntity<Object>(sessionService.chercherParCaissierEtEtat(id,etat),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 
     
    

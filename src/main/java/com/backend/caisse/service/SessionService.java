@@ -26,7 +26,9 @@ public interface SessionService {
 
     List<SessionCaisse> chercherParCaissierId(Long id);
 
-    SessionCaisse chercherParEtatETCaissier(String etat,Long id);
+    List<SessionCaisse> chercherParEtatETCaissier(String etat,Long id);
+
+    SessionCaisse chercherParCaissierEtEtat(Long id,String etat);
 
     void modifierSessionParMontantEtNbFacture(double d, Long nbF, Long numc);
 

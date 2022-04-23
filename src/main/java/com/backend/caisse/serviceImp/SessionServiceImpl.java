@@ -52,7 +52,7 @@ public class SessionServiceImpl implements SessionService {
   
 
     @Override
-    public SessionCaisse chercherParEtatETCaissier(String etat,Long mat) {
+    public List<SessionCaisse> chercherParEtatETCaissier(String etat,Long mat) {
 
         return SessionRepository.findByEtatAndCaissierIdU(etat,mat);
     }
@@ -96,6 +96,12 @@ public class SessionServiceImpl implements SessionService {
     public void annulerSession(double mt, Long numS) {
         SessionRepository.AnnulerSessionMontantAndNbFacture(mt,  numS);
         
+    }
+
+    @Override
+    public SessionCaisse chercherParCaissierEtEtat(Long id,String etat) {
+        // TODO Auto-generated method stub
+        return SessionRepository.findByCaissierIdUAndEtat(id,etat);
     }
 
     /*@Override

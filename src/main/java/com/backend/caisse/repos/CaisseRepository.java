@@ -30,4 +30,6 @@ public interface CaisseRepository extends JpaRepository<Caisse, Long> {
 	Caisse findByIdC(Long id);
 
 	List<Caisse>findByEtat(String etat);
+
+	List<Caisse>findBySessionsEtat(String etat);
 }
