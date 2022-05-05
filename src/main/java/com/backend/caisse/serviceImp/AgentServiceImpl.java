@@ -7,6 +7,7 @@ import com.backend.caisse.repos.AgentRepository;
 import com.backend.caisse.service.AgentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,8 +15,12 @@ public class AgentServiceImpl implements AgentService{
     @Autowired
     AgentRepository agentRepository;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public Agent AjouterAgent(Agent agt) {
+        agt.setMotDePasse(bCryptPasswordEncoder.encode(agt.getMotDePasse()));
         return agentRepository.save(agt);
     }
 

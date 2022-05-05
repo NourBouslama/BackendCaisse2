@@ -7,6 +7,7 @@ import com.backend.caisse.repos.CaissierRepository;
 import com.backend.caisse.service.CaissierService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,9 +15,12 @@ public class CaissierServiceImpl implements CaissierService {
 
     @Autowired
     private CaissierRepository caissierRepository;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public Caissier ajouterCaissier(Caissier p) {
+        p.setMotDePasse(bCryptPasswordEncoder.encode(p.getMotDePasse()));
 
         return caissierRepository.save(p);
     }

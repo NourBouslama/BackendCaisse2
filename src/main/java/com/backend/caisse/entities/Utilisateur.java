@@ -3,6 +3,7 @@ package com.backend.caisse.entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,10 @@ public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idU;
+
+    @Column(unique = true)
     private String matricule;
+    
     private String nom;
     private String prenom;
     private String email;
