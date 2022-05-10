@@ -21,4 +21,9 @@ import lombok.Setter;
 @Entity
 public class Admin extends Utilisateur {
     
+    public Admin(Long idU, String matricule, String nom, String prenom, String email, String adresse, String etat,
+            String motDePasse, List<Poste> postes, Role role) {
+        super(idU, matricule, nom, prenom, email, adresse, etat, motDePasse, postes, role);
+    }
+    
 }

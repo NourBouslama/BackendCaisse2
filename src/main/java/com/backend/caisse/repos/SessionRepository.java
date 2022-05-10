@@ -1,5 +1,6 @@
 package com.backend.caisse.repos;
 
+import java.util.Date;
 import java.util.List;
 
 import com.backend.caisse.entities.Caisse;
@@ -18,7 +19,7 @@ public interface SessionRepository extends JpaRepository<SessionCaisse, Long> {
     
 	List<SessionCaisse>  findByEtatAndCaisseNumC(String etat,Long numc);
 
-	List<SessionCaisse> findByCaissierIdU(Long id);
+	List<SessionCaisse> findByCaissierIdUOrderByDateOuvertureDesc(Long id);
 
 	List<SessionCaisse> findByEtatAndCaissierIdU(String etat,Long id);
 
@@ -51,4 +52,7 @@ public interface SessionRepository extends JpaRepository<SessionCaisse, Long> {
 	@Modifying
 	@Query("update SessionCaisse p set p.montantSession =p.montantSession - ?1 , p.nbFacture= p.nbFacture -1 where p.numS = ?2")
 	void AnnulerSessionMontantAndNbFacture(double mt, Long nums);
+    
+	//@Query("select * from SessionCaisse p where p.etatJournal=?1 and SUBSTR(p.datefermeture,1,10)=SUBSTR(NOW(),1,10) and p.caissier.idU = ?2")
+	List<SessionCaisse>findByEtatJournalAndCaissierIdUAndDatefermeture(String e,Long id,Date d);
 }

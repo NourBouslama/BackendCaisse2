@@ -1,5 +1,6 @@
 package com.backend.caisse.serviceImp;
 
+import java.util.Date;
 import java.util.List;
 
 import com.backend.caisse.entities.Caisse;
@@ -83,7 +84,7 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public List<SessionCaisse> chercherParCaissierId(Long id) {
         // TODO Auto-generated method stub
-        return SessionRepository.findByCaissierIdU(id);
+        return SessionRepository.findByCaissierIdUOrderByDateOuvertureDesc(id);
     }
 
     @Override
@@ -102,6 +103,12 @@ public class SessionServiceImpl implements SessionService {
     public SessionCaisse chercherParCaissierEtEtat(Long id,String etat) {
         // TODO Auto-generated method stub
         return SessionRepository.findByCaissierIdUAndEtat(id,etat);
+    }
+
+    @Override
+    public List<SessionCaisse> ChercherSessionParEtatJournal(String e, Long id,Date d) {
+   
+        return SessionRepository.findByEtatJournalAndCaissierIdUAndDatefermeture(e, id,d);
     }
 
     /*@Override

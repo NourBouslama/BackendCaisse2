@@ -1,5 +1,7 @@
 package com.backend.caisse.service;
 
+
+import java.util.Date;
 import java.util.List;
 
 import com.backend.caisse.entities.Caisse;
@@ -34,6 +36,8 @@ public interface SessionService {
     SessionCaisse modifierSessionParMontantEtNbFacture(SessionCaisse sessionCaisse);
 
     void annulerSession(double mt, Long numS);
+
+    List<SessionCaisse> ChercherSessionParEtatJournal(String e,Long id,Date d);
 
     
 

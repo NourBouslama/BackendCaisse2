@@ -1,5 +1,6 @@
 package com.backend.caisse.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 import com.backend.caisse.entities.Caisse;
@@ -28,6 +29,16 @@ public class SessionRestController {
     public  ResponseEntity<Object>  listerSessionCaisses() {
         try{
             return new ResponseEntity<Object>(sessionService.listerSessionCaisses(),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @RequestMapping(path = "/ChercherSessionParEtatJournal/{etatj}/{id}/{d}", method = RequestMethod.GET)
+    public  ResponseEntity<Object>  ChercherSessionParEtatJournal(@PathVariable("etatj") String etat,@PathVariable("id") Long id,@PathVariable("d") Date d) {
+        try{
+            return new ResponseEntity<Object>(sessionService.ChercherSessionParEtatJournal(etat,id,d),HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
