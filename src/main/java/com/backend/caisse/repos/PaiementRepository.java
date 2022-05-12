@@ -15,25 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface PaiementRepository extends JpaRepository<Paiement, Long> {
     
-    Paiement findByIdP(Long idP);
-    
     Paiement findByEncaissementIdE(Long ide);
-
-    @Transactional
-    @Modifying
-    @Query("update Paiement p set p.etat='Annuler' where p.idP=?1")
-    void annulerPaiement(long ff);
-
-
-    @Transactional
-    @Modifying
-    @Query("update Paiement p set p.encaissement=?1 where p.idP=?2")
-    void updateEncaissementPaiement(Encaissement enc, long idp);
-
-    // peut changer pr faire une modification pr encaissement tab
-    @Transactional
-    @Modifying
-    @Query("update Paiement p set p.agent=?1 where p.idP=?2")
-    void updatePaiement(Agent agent, long idp);
     
 }

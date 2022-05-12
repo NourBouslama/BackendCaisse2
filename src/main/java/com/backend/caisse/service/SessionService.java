@@ -37,7 +37,7 @@ public interface SessionService {
 
     void annulerSession(double mt, Long numS);
 
-    List<SessionCaisse> ChercherSessionParEtatJournal(String e,Long id,Date d);
+        Long ChercherSessionParEtatJournal(String e,Long id);
 
     
 

@@ -39,13 +39,13 @@ public class Paiement {
     @JoinColumn(name="encaissement_id",referencedColumnName = "idE")
     private Encaissement encaissement;
 
-    @JsonIgnore
+   /* @JsonIgnore
     @OneToMany(mappedBy = "paiement")
-    private List<Facture> factures;
+    private List<Facture> factures;*/
 
     @ManyToOne
     private Agent agent;
 
-    @ManyToOne
-    private Client cli;
+  /*  @ManyToOne
+    private Client cli;*/
 }

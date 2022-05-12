@@ -26,7 +26,7 @@ public class Client {
     
     @JsonIgnore
     @OneToMany(mappedBy = "cli")
-    private List<Paiement> paiements;
+    private List<PaiementSansFacture> paiements;
     
     @JsonIgnore
     @OneToMany(mappedBy = "client")

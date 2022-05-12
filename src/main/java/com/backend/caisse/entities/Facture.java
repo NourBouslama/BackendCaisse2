@@ -1,5 +1,6 @@
 package com.backend.caisse.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -33,10 +34,10 @@ public class Facture {
 
     private Date periodeCons; // Période de Consommation
     private String etat;
-    private Date dateF; // date finale pour payer la facture
+    private LocalDate dateF; // date finale pour payer la facture
 
     @ManyToOne
-    private Paiement paiement;
+    private PaiementAvecFacture paiement;
 
     @ManyToOne
     private Contrat contrat;

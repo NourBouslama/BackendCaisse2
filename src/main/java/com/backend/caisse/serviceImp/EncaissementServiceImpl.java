@@ -54,8 +54,8 @@ public class EncaissementServiceImpl implements EncaissementService{
     }
 
     @Override
-    public void annulerEncaissement(Long idE) {
-        encaissementRepository.EncaissementEtatAnnuler(idE);
+    public void modifierEncaissement(String e,double mts, Long idE) {
+        encaissementRepository.modifierEncaissement(e,mts,idE);
         
     }
 

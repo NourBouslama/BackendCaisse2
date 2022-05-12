@@ -29,25 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 http.csrf().disable();
 	 http.sessionManagement().
 	sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-	/////
-	//consulter tous les produits
-	//http.authorizeRequests().antMatchers(HttpMethod.GET,"/caissier/listerCaissiers/**").hasAnyAuthority("admin","super caissier");
-	//http.authorizeRequests().antMatchers(HttpMethod.GET,"/mode/listerModePaiements/**").hasAnyAuthority("admin","super caissier","caissier");
-		 
-	//consulter un produit par son id  
- /*  http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/**").hasAnyAuthority("ADMIN","USER");
-   
-//operation pour l'admin seul(ajout,modif,supp)
-   
-	//ajouter un nouveau produit
-   http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/**").hasAuthority("ADMIN");
-	
-	//modifier un produit
-   http.authorizeRequests().antMatchers(HttpMethod.PUT,"/api/**").hasAuthority("ADMIN");*/
-	
-   //supprimer un produit
-  // http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/**").hasAuthority("ADMIN");
-	/////
+
 	 http.authorizeRequests().antMatchers("/login").permitAll(); 
 	 http.authorizeRequests().anyRequest().authenticated();
 	 http.addFilter(new JWTAuthenticationFilter (authenticationManager())) ;

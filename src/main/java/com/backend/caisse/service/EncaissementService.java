@@ -19,6 +19,7 @@ public interface EncaissementService {
 
     Encaissement ajouterEncaissement(Encaissement encaissement);
 
-    void annulerEncaissement(Long idE);
+    void modifierEncaissement(String e,double mts, Long idE);
+
     
 }

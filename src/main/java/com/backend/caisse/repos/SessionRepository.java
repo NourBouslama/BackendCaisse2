@@ -53,6 +53,6 @@ public interface SessionRepository extends JpaRepository<SessionCaisse, Long> {
 	@Query("update SessionCaisse p set p.montantSession =p.montantSession - ?1 , p.nbFacture= p.nbFacture -1 where p.numS = ?2")
 	void AnnulerSessionMontantAndNbFacture(double mt, Long nums);
     
-	//@Query("select * from SessionCaisse p where p.etatJournal=?1 and SUBSTR(p.datefermeture,1,10)=SUBSTR(NOW(),1,10) and p.caissier.idU = ?2")
-	List<SessionCaisse>findByEtatJournalAndCaissierIdUAndDatefermeture(String e,Long id,Date d);
+	@Query("select SessionCaisse from SessionCaisse p where p.etatJournal=?1 and SUBSTR(p.datefermeture,1,10)=SUBSTR(NOW(),1,10) and p.caissier.idU = ?2")
+	SessionCaisse findByEtatJournalAndCaissierIdUAndDatefermeture(String e,Long id);
 }

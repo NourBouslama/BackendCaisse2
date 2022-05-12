@@ -35,10 +35,10 @@ public class SessionRestController {
 
     }
 
-    @RequestMapping(path = "/ChercherSessionParEtatJournal/{etatj}/{id}/{d}", method = RequestMethod.GET)
-    public  ResponseEntity<Object>  ChercherSessionParEtatJournal(@PathVariable("etatj") String etat,@PathVariable("id") Long id,@PathVariable("d") Date d) {
+    @RequestMapping(path = "/ChercherSessionParEtatJournal/{etatj}/{id}", method = RequestMethod.GET)
+    public  ResponseEntity<Object>  ChercherSessionParEtatJournal(@PathVariable("etatj") String etat,@PathVariable("id") Long id) {
         try{
-            return new ResponseEntity<Object>(sessionService.ChercherSessionParEtatJournal(etat,id,d),HttpStatus.OK);
+            return new ResponseEntity<Object>(sessionService.ChercherSessionParEtatJournal(etat,id),HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<Object>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }

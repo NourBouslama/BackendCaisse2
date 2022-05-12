@@ -106,9 +106,9 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public List<SessionCaisse> ChercherSessionParEtatJournal(String e, Long id,Date d) {
+    public Long ChercherSessionParEtatJournal(String e, Long id) {
    
-        return SessionRepository.findByEtatJournalAndCaissierIdUAndDatefermeture(e, id,d);
+        return SessionRepository.findByEtatJournalAndCaissierIdUAndDatefermeture(e,id);
     }
 
     /*@Override

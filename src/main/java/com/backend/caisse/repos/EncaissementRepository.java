@@ -25,8 +25,8 @@ public interface EncaissementRepository extends JpaRepository<Encaissement, Long
 
   @Transactional
   @Modifying
-  @Query("update Encaissement e set e.etat='Annuler' where e.idE=?1")
-  void EncaissementEtatAnnuler(long idp);
+  @Query("update Encaissement e set e.etat=?1, e.montantE= e.montantE -?2 where e.idE=?3")
+  void modifierEncaissement(String e,double mt,long idp);
 
   List<Encaissement> findByEtatAndSessionNumS(String etat,Long num);
 
